@@ -37,7 +37,8 @@
              easing:linear;
              startEvents: mouseenter;"
              event-set__reset="_event: animationcomplete__enter; scale: 1 1 1"
-             animation__leave="property: scale; to:1 1 1; dur: 2000; easing: linear; startEvents: mouseleave;"></a-entity>
+             animation__leave="property: scale; to:1 1 1; dur: 2000; easing: linear; startEvents: mouseleave;"
+             raycaster="objects: .clickable"></a-entity>
          </a-camera>
 
         <a-entity gltf-model="#apart" scale="1.5 1.5 1.5"></a-entity>
@@ -46,7 +47,7 @@
         <a-entity id="burger" obj-model="obj: #burger-o; mtl: #burger-m;" scale=".0005 .0005 .0005" position="-5 .45 6" rotation="-90 0 0"></a-entity>
         <a-entity id="burger2" obj-model="obj: #burger-o; mtl: #burger-m;" scale=".0005 .0005 .0005" position="-4.75 0.125 -4.5" rotation="-90 0 0" visible="false"></a-entity> 
 
-        <a-box width=".1" height=".1" depth=".1" position="-5 .49 6" id="burgerBox" visible="false"
+        <a-box class="clickable" width=".1" height=".1" depth=".1" position="-5 .49 6" id="burgerBox" visible="false"
         event-set__movetarget="_event: click; _target:#burger; position: 100000 0 0;"
         event-set__click-text="_event: click; _target:#burgerclue; position: -4 1 8;"
         event-set__targetappear="_event: click; _target:#burgerBox; visible:false;"
@@ -58,15 +59,15 @@
         <a-text value="We're out of burgers! Go knock (by clicking) on the red doorbells of the apartments to find Mr. Gates. He will give you another one. But make sure not to ask anyone else, they will get very annoyed" 
         id="burgerclue" position="100000 0 0" rotation="0 180 0"></a-text>
         
-        <a-box width=".1" height=".1" depth=".1" position="10000 0 0" id="doorbellone" src="#brick"
+        <a-box class="clickable" width=".1" height=".1" depth=".1" position="10000 0 0" id="doorbellone" src="#brick"
         event-set__movetarget="_event: click; _target:#doorbellone; position: 100000 0 0;"
         event-set__click="_event: click; _target:#MrRogerNegative; position: -8.5 0.5 -1;"></a-box>
 
-        <a-box width=".1" height=".1" depth=".1" position="10000 0 0" id="doorbelltwo" src="#brick"
+        <a-box class="clickable" width=".1" height=".1" depth=".1" position="10000 0 0" id="doorbelltwo" src="#brick"
         event-set__movetarget="_event: click; _target:#doorbelltwo; position: 100000 0 0;"
         event-set__click="_event: click; _target:#MrRogerNegative2; position: 4.1 0.4 -2.75;"></a-box>
 
-        <a-box width=".1" height=".1" depth=".1" position="10000 0 0" id="doorbellthree" src="#brick"
+        <a-box class="clickable" width=".1" height=".1" depth=".1" position="10000 0 0" id="doorbellthree" src="#brick"
         event-set__movetarget="_event: click; _target:#doorbellthree; position: 100000 0 0;"
         event-set__click="_event: click; _target:#MrRogerPositive; position: 13.25 .5 0.25;"
         event-set__click-sign="_event: click; _target:#burgerclue; position: 10000 0 0;"
@@ -79,7 +80,7 @@
         event-set__click-mrn2="_event: click; _target:#MrRogerNegative2; position: 10000 0 0;"></a-box>
 
         <a-entity id="key" obj-model="obj: #key-o; mtl: #key-m;" scale=".05 .05 .05" position="10000 0 0" rotation="-90 0 0"></a-entity>
-        <a-box width=".1" height=".1" depth=".1" position="10000 0 0" id="keybox" visible="false"
+        <a-box class="clickable" width=".1" height=".1" depth=".1" position="10000 0 0" id="keybox" visible="false"
         event-set__click-keys="_event: click; _target:#key; position: 10000 0 0;"
         event-set__click-box="_event: click; _target:#keybox; position: 10000 0 0;"
         event-set__click-cluemiss="_event: click; _target:#MissingClue; position: 10000 0 0;"
@@ -87,7 +88,7 @@
         event-set__click-boxcar="_event: click; _target:#placeBox; position: -5.25 0.2 1.25;"
         ></a-box>
 
-        <a-box width=".1" height=".1" depth=".1" position="10000 0 0" id="placeBox" src="#brick"
+        <a-box class="clickable" width=".1" height=".1" depth=".1" position="10000 0 0" id="placeBox" src="#brick"
         event-set__click-boxpla="_event: click; _target:#placeBox; position: 10000 0 0;"
         event-set__click-burgerfinal="_event: click; _target:#burger; position: -5 .45 6;"
         event-set__click-final="_event: click; _target:#final; position: -4 1 8;"
