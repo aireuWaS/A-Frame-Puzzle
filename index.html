@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Puzzle</title>
+	<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+	<script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script> 
+</head>
+
+<body>
+    <a-scene>
+        <a-assets>
+            <!--Apartment Complex Credit: https://poly.google.com/view/bGsmc1_k5MB-->
+            <a-asset-item id="apart" src="assets/apartment/apartment.gltf"></a-asset-item>
+            <!--Brick Credit: https://www.pinterest.com/pin/317011261250497482/-->
+            <img id="brick" src="assets/bricks.jpg">
+            <!--Picnic Table Credit: https://poly.google.com/view/7-B-Vmz3QtU-->
+            <a-asset-item id="picnic-o" src="assets/picnictable-obj/model.obj"></a-asset-item>
+            <a-asset-item id="picnic-m" src="assets/picnictable-obj/materials.mtl"></a-asset-item>
+            <!--Burger Credit: https://poly.google.com/view/eke7qcu_FR2-->
+            <a-asset-item id="burger-o" src="assets/burger-obj/Hamburger.obj"></a-asset-item>
+            <a-asset-item id="burger-m" src="assets/burger-obj/Hamburger.mtl"></a-asset-item>
+            <!--Key Credit: https://poly.google.com/view/b1XMMDEWe1i-->
+            <a-asset-item id="key-o" src="assets/key-obj/key.obj"></a-asset-item>
+            <a-asset-item id="key-m" src="assets/key-obj/key.mtl"></a-asset-item>
+        </a-assets>
+
+        <a-sky color="#ACE"></a-sky>
+
+		<a-camera position="0 .6 0">
+             <a-entity cursor="fuse: true; fuseTimeout: 1000;"
+             position="0 0 -1"
+             geometry="primitive: sphere; radius: 0.005"
+             material="color: black; shader: flat"
+             animation__enter="property: scale; to: 3 3 3;
+             dur:2000;
+             easing:linear;
+             startEvents: mouseenter;"
+             event-set__reset="_event: animationcomplete__enter; scale: 1 1 1"
+             animation__leave="property: scale; to:1 1 1; dur: 2000; easing: linear; startEvents: mouseleave;"></a-entity>
+         </a-camera>
+
+        <a-entity gltf-model="#apart" scale="1.5 1.5 1.5"></a-entity>
+
+        <a-entity obj-model="obj: #picnic-o; mtl: #picnic-m;" scale=".125 .125 .125" position="-5 .35 6"></a-entity>
+        <a-entity id="burger" obj-model="obj: #burger-o; mtl: #burger-m;" scale=".0005 .0005 .0005" position="-5 .45 6" rotation="-90 0 0"></a-entity>
+        <a-entity id="burger2" obj-model="obj: #burger-o; mtl: #burger-m;" scale=".0005 .0005 .0005" position="-4.75 0.125 -4.5" rotation="-90 0 0" visible="false"></a-entity> 
+
+        <a-box width=".1" height=".1" depth=".1" position="-5 .49 6" id="burgerBox" visible="false"
+        event-set__movetarget="_event: click; _target:#burger; position: 100000 0 0;"
+        event-set__click-text="_event: click; _target:#burgerclue; position: -4 1 8;"
+        event-set__targetappear="_event: click; _target:#burgerBox; visible:false;"
+        event-set__click-one="_event: click; _target:#doorbellone; position: -6.25 0.2 -1;"
+        event-set__click-two="_event: click; _target:#doorbelltwo; position: 5.75 0.2 -3;"
+        event-set__click-three="_event: click; _target:#doorbellthree; position: 13.75 .3 3.5;"
+        event-set__click-final="_event: click; _target:#start; position: 10000 0 0;"></a-box>
+
+        <a-text value="We're out of burgers! Go knock (by clicking) on the red doorbells of the apartments to find Mr. Gates. He will give you another one. But make sure not to ask anyone else, they will get very annoyed" 
+        id="burgerclue" position="100000 0 0" rotation="0 180 0"></a-text>
+        
+        <a-box width=".1" height=".1" depth=".1" position="10000 0 0" id="doorbellone" src="#brick"
+        event-set__movetarget="_event: click; _target:#doorbellone; position: 100000 0 0;"
+        event-set__click="_event: click; _target:#MrRogerNegative; position: -8.5 0.5 -1;"></a-box>
+
+        <a-box width=".1" height=".1" depth=".1" position="10000 0 0" id="doorbelltwo" src="#brick"
+        event-set__movetarget="_event: click; _target:#doorbelltwo; position: 100000 0 0;"
+        event-set__click="_event: click; _target:#MrRogerNegative2; position: 4.1 0.4 -2.75;"></a-box>
+
+        <a-box width=".1" height=".1" depth=".1" position="10000 0 0" id="doorbellthree" src="#brick"
+        event-set__movetarget="_event: click; _target:#doorbellthree; position: 100000 0 0;"
+        event-set__click="_event: click; _target:#MrRogerPositive; position: 13.25 .5 0.25;"
+        event-set__click-sign="_event: click; _target:#burgerclue; position: 10000 0 0;"
+        event-set__click-leftsing="_event: click; _target:#MissingClue; position: -4 1 8;"
+        event-set__click-key="_event: click; _target:#key; position: -5 .175 -6;"
+        event-set__click-keysip="_event: click; _target:#keybox; position: -5 .175 -6;"
+        event-set__click-db1="_event: click; _target:#doorbellone; position: 10000 0 0;"
+        event-set__click-db2="_event: click; _target:#doorbelltwo; position: 10000 0 0;"
+        event-set__click-mrn="_event: click; _target:#MrRogerNegative; position: 10000 0 0;"
+        event-set__click-mrn2="_event: click; _target:#MrRogerNegative2; position: 10000 0 0;"></a-box>
+
+        <a-entity id="key" obj-model="obj: #key-o; mtl: #key-m;" scale=".05 .05 .05" position="10000 0 0" rotation="-90 0 0"></a-entity>
+        <a-box width=".1" height=".1" depth=".1" position="10000 0 0" id="keybox" visible="false"
+        event-set__click-keys="_event: click; _target:#key; position: 10000 0 0;"
+        event-set__click-box="_event: click; _target:#keybox; position: 10000 0 0;"
+        event-set__click-cluemiss="_event: click; _target:#MissingClue; position: 10000 0 0;"
+        event-set__click-clue-car="_event: click; _target:#carClue; position: -4 1 8;"
+        event-set__click-boxcar="_event: click; _target:#placeBox; position: -5.25 0.2 1.25;"
+        ></a-box>
+
+        <a-box width=".1" height=".1" depth=".1" position="10000 0 0" id="placeBox" src="#brick"
+        event-set__click-boxpla="_event: click; _target:#placeBox; position: 10000 0 0;"
+        event-set__click-burgerfinal="_event: click; _target:#burger; position: -5 .45 6;"
+        event-set__click-final="_event: click; _target:#final; position: -4 1 8;"
+        event-set__click-finalClue="_event: click; _target:#carClue; position: 10000 0 0;"
+        ></a-box>
+
+        <a-text id="MrRogerNegative" value="Erh! Get away from my door, stupid kids!" color="black" position="10000 0 0"></a-text>
+        <a-text id="MrRogerNegative2" value="Erh! Get away from my door, stupid kids!" color="black" position="10000 0 0"></a-text>
+        <a-text id="MrRogerPositive" value="You Need another burger? Sure thing! I just put it on your picnic table!" color="black" position="10000 0 0" rotation="0 -90 0"></a-text>
+        <a-text id="MissingClue" value="Oh No! Someone just took your burger! I think they went into a car. Go use see if there are car keys anywhere!" position="10000 0 0" rotation="0 180 0"></a-text>
+        <a-text id="carClue" value="Wow! Great you found it! I think that belongs to the red car. Go try to see if the robber will give it back to you by placing the key on that brick box"
+        position="10000 0 0" rotation="0 180 0"></a-text>
+        <a-text id="final" rotation="0 180 0" position="10000 0 0" value="Now you can final enjoy your burger! You Win!"></a-text>
+        <a-text id="start" position= "-2.5 2 -3" value="Welcome to the game. To click objects, just hover over them with your crosshair. If it does not immidately work, try another angle. Your first task is to go eat (by clicking on it) the burger on that picnic table"></a-text>
+
+    </a-scene>
+
+</body>
+</html>
